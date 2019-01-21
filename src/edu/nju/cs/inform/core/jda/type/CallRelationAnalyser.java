@@ -55,7 +55,7 @@ public class CallRelationAnalyser {
 
             classComment = (typeDec.getJavadoc() != null) ? typeDec.getJavadoc().toString() : "";
         } else {
-            System.out.println(("No Class exists in this java file"));
+//            System.out.println(("No Class exists in this java file"));
             return;
         }
 

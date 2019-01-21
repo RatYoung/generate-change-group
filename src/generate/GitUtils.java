@@ -10,16 +10,22 @@ import org.eclipse.jgit.lib.ObjectId;
 
 public class GitUtils {
 	
+	public static String currentBranch = null;
+	
 	public static void checkoutCommit(File repoDir, String commitName) throws IOException, RefAlreadyExistsException, RefNotFoundException, InvalidRefNameException, CheckoutConflictException, GitAPIException {
 		File gitDir = new File(repoDir.getAbsolutePath() + "\\.git");
 		FileRepository repo = new FileRepository(gitDir);
 		Git git = new Git(repo);
 		ObjectId id = repo.resolve(commitName);
-		git.checkout().setName(id.name()).call();
-		System.out.println("-------------Checkout successfully----------");
-		System.out.println("Commit: " + commitName);
-		System.out.println("SHA-1: " + id.name());
+		if(!commitName.equals(currentBranch)) {
+			git.checkout().setName(id.name()).call();
+			System.out.println("-------------Checkout successfully----------");
+			System.out.println("Commit: " + commitName);
+			System.out.println("SHA-1: " + id.name());
+		}else
+			git.checkout().setName(repo.getBranch()).call();
 		git.getRepository().close();
+		git.close();
 	}
 	
 	

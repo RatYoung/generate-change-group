@@ -71,7 +71,7 @@ public class JavaElementsParser {
 
             parseClass();
         } else {
-            System.out.println(("No Class exists in this java file"));
+//            System.out.println(("No Class exists in this java file"));
             return;
         }
     }
