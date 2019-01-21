@@ -33,33 +33,6 @@ public class NewRetro {
 		this.codeElementChangeList = codeElementChangeList;
 		// get change description from code changes
 		ArtifactsCollection changeDescriptionCollection = comparer.getChangeDescriptionCollection();
-		
-		/*
-		final ArtifactsCollection requirementCollection = ArtifactsReader.getCollections(requirement_Path, ".txt");
-
-		// retrieval change description to requirement
-		Retrieval retrieval = new Retrieval(changeDescriptionCollection, requirementCollection, IRModelConst.VSM);
-		retrieval.tracing();
-		final SimilarityMatrix similarityMatrix = retrieval.getSimilarityMatrix();
-		final MethodRecommendation methodRecommendation = new MethodRecommendation(comparer, requirementCollection,
-				similarityMatrix);
-		final Map<String, List<String>> recommendMethodsForRequirements = methodRecommendation
-				.getRecommendMethodsForRequirements();
-		this.recommendMethodsForRequirements = recommendMethodsForRequirements;
-		recommentMethodsBodyCollection = comparer.getRecommentMethodsBodyCollection();
-
-		Map<String, Double> candidatedOutdatedRequirementsRank = retrieval.getCandidateOutdatedRequirementsRank();
-		// 锟斤拷map转锟斤拷锟斤拷list
-		List<Map.Entry<String, Double>> list = new ArrayList<>(candidatedOutdatedRequirementsRank.entrySet());
-		Collections.sort(list, new Comparator<Map.Entry<String, Double>>() {
-			@Override
-			// 锟斤拷锟斤拷锟斤拷锟斤拷
-			public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) {
-				return o2.getValue().compareTo(o1.getValue());
-			}
-		});
-		this.reqElementList = list;
-		*/
 	}
 
 	// 锟斤拷元锟斤拷锟斤拷锟斤拷锟�
