@@ -19,7 +19,7 @@ public class GitUtils {
 		System.out.println("-------------Checkout successfully----------");
 		System.out.println("Commit: " + commitName);
 		System.out.println("SHA-1: " + id.name());
-		git.close();
+		git.getRepository().close();
 	}
 	
 	

@@ -6,6 +6,9 @@ import edu.nju.cs.inform.core.recommend.*;
 import edu.nju.cs.inform.io.*;
 import edu.nju.cs.inform.core.ir.*;
 
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
 import java.util.*;
 
 /**
@@ -22,7 +25,7 @@ public class NewRetro {
 	public Map<String, List<String>> recommendMethodsForRequirements;
 	public Map<String, String> recommentMethodsBodyCollection;
 
-	public void process(String new_source_path, String old_source_path, String requirement_Path) {
+	public void process(String new_source_path, String old_source_path, String requirement_Path, Boolean isSaved) {
 		this.new_source_path = new_source_path;
 		this.old_source_path = old_source_path;
 		this.requirement_Path = requirement_Path;
