@@ -20,12 +20,12 @@ public class Body {
 	public static void main(String[] args) throws IOException, RefAlreadyExistsException, RefNotFoundException, InvalidRefNameException, CheckoutConflictException, GitAPIException {
 		NewRetro re = new NewRetro();
 
-		//String rollBackNum = args[2];
+		//String rollBackNum = args[1];
 		//String newVerPath = args[0];
-		//String oldVerPath = args[1] + rollBackNum;
+		//String oldVerPath = args[0] +"-head~"+rollBackNum;
 		String rollBackNum = "50";
-		String newVerPath = "C:\\Users\\24541\\Desktop\\创新项目\\source_codes\\测试用开源工程\\commons-io-master";
-		String oldVerPath = "C:\\Users\\24541\\Desktop\\创新项目\\source_codes\\测试用开源工程\\commons-io-head~"+rollBackNum;
+		String newVerPath = "C:\\Users\\24541\\Desktop\\创新项目\\source_codes\\测试用开源工程\\commons-io";
+		String oldVerPath = "C:\\Users\\24541\\Desktop\\创新项目\\source_codes\\测试用开源工程\\commons-io"+"-head~"+rollBackNum;
 		String reqPath = "C:\\Users\\24541\\Desktop\\req-swing-demo\\data\\sample\\AquaLush_Requirement";
 		
 		//copy master dir in order to prepare older version
