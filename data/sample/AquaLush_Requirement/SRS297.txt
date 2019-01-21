@@ -1,0 +1,1 @@
+set clock state display screen shown figur 

@@ -1,0 +1,1 @@
+If a new critical moisture level setting fails validation, then AquaLush must notify the user of the problem and not accept the new setting.

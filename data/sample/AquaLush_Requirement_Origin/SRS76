@@ -1,0 +1,1 @@
+If AquaLush cannot read its persistent store during operation, then it must continue operation.

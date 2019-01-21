@@ -1,0 +1,1 @@
+If the user attempts to enter an illegal digit, the digit must not be displayed and the terminal must beep.

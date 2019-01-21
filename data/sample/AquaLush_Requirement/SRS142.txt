@@ -1,0 +1,1 @@
+con gurat open read pars treat persist store failur 

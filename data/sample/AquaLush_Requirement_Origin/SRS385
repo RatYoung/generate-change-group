@@ -1,0 +1,1 @@
+The Device Failure state must be entered to notify the user that a sensor or valve has failed and possibly that AquaLush cannot write to its persistent store.

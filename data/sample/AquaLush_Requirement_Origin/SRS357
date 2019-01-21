@@ -1,0 +1,1 @@
+If a new irrigation time is only partially entered when the user presses the “Accept New Settings” button, the irrigation time must not be changed, but any changes to the irrigation days must be accepted.

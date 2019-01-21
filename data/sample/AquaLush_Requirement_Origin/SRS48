@@ -1,0 +1,1 @@
+AquaLush must set the total water used in manual irrigation to zero when it starts up in manual mode or when it is switched to manual mode from automatic mode.

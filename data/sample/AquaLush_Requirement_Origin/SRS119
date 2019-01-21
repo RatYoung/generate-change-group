@@ -1,0 +1,1 @@
+A sensor identiﬁer must consist of the letter “S” (upper- or lowercase) followed by a unique integer in the range 0..999.

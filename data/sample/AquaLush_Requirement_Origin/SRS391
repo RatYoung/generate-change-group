@@ -1,0 +1,1 @@
+The message about failure to write to persistent store must appear only if this failure actually occurs.

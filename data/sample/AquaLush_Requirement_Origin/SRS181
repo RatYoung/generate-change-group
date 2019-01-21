@@ -1,0 +1,1 @@
+The simulated water evaporation rate must be an integer in the range 0..100 interpreted as the percent change in moisture level per day (as reﬂected in the simulated moisture sensor reading).

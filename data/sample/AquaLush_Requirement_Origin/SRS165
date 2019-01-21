@@ -1,0 +1,1 @@
+The length of time the valve has been open must be a military time speciﬁcation in the form hhmm, where hh must be hours in the range 0..23 and mm must be minutes in the range 0..59. All four digits must always be displayed.

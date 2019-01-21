@@ -1,0 +1,1 @@
+When a device is removed from the list and the list becomes empty, there must be no current device.

@@ -1,0 +1,1 @@
+If AquaLush cannot write to its persistent store, then it must alert the user of the problem and continue operation.

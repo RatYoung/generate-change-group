@@ -1,0 +1,1 @@
+The total water used during manual irrigation must also be displayed. This value must be an integer in the range 0..2^31–1 describing the water used in gallons.

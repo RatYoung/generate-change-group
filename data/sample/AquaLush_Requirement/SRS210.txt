@@ -1,0 +1,1 @@
+sensor readabl provid data convert percent satur valu 

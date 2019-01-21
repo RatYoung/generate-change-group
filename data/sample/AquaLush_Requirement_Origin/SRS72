@@ -1,0 +1,1 @@
+If a valve cannot be manipulated after three tries, then AquaLush must mark that valve as failed in its persistent store and stop using it in irrigation.

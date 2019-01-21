@@ -1,0 +1,1 @@
+If a sensor cannot be read after three tries, then AquaLush must mark that sensor as failed in its persistent store and stop using it in irrigation.

@@ -1,0 +1,1 @@
+follow data record valv identi type locat flow rate oper status 

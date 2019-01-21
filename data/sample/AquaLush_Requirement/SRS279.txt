@@ -1,0 +1,1 @@
+status indic singl charact column format open close 

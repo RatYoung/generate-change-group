@@ -1,0 +1,1 @@
+The simulation speed must be a multiple of the real rate of time speciﬁed as an integer multiplier in the range 1..1000.

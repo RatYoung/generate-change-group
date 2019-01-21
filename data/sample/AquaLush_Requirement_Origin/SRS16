@@ -1,0 +1,1 @@
+If a new time setting fails validation, then AquaLush must notify the user of the problem and not accept the new setting.

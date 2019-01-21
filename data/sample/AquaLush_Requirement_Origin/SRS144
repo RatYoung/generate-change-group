@@ -1,0 +1,1 @@
+AquaLush must record its system parameters in persistent store so that its state can be restored at startup.

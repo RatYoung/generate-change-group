@@ -1,0 +1,1 @@
+If AquaLush cannot read its persistent store when starting up, then it must display an error message and suspend operation.

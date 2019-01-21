@@ -1,0 +1,1 @@
+If the user presses keypad digit keys when there are already four digits in the Current Time display, then the display must not be changed and the terminal must beep.

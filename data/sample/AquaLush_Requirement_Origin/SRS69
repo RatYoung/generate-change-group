@@ -1,0 +1,1 @@
+If a sensor cannot be read after three tries when AquaLush is irrigating that sensor’s zone, then AquaLush must close all valves in that zone and continue the irrigation cycle as if that sensor had indicated that the zone had reached its critical moisture level.

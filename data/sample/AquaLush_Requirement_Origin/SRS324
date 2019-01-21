@@ -1,0 +1,1 @@
+When a device is removed from the list and there is no device below the removed device but there is one above it, then device above must become the current device.

@@ -1,0 +1,1 @@
+sensor locat string charact angl bracket 

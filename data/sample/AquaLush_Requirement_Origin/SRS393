@@ -1,0 +1,1 @@
+The Persistent Store Failure state must be entered to notify the user that AquaLush cannot read from or write to its persistent store.

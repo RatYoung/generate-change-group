@@ -1,0 +1,1 @@
+sensor read tri aqualush irrig sensor zone aqualush close valv zone continu irrig cycl sensor indic zone reach critic moistur level 

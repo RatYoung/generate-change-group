@@ -1,0 +1,1 @@
+If the user presses keypad digit keys when there are already three digits in the current zone’s moisture level display, then the display must not be changed and the terminal must beep.

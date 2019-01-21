@@ -1,0 +1,1 @@
+If the water allocation is set when automatic irrigation is in progress, then AquaLush must recompute the allocations for each unirrigated irrigation zone and use them immediately to control irrigation.

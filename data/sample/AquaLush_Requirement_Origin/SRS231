@@ -1,0 +1,1 @@
+Many screens have centered text. Text must be centered by dividing the length of the text in two, rounding down, and subtracting this value from 20 to reach the display column where the text begins. The ﬁrst column must be zero.

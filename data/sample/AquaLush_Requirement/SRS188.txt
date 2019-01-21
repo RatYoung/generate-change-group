@@ -1,0 +1,1 @@
+default sensor valv oper status true 

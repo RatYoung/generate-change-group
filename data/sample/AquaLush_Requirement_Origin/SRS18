@@ -1,0 +1,1 @@
+If the current time is set so that an irrigation time is skipped, then AquaLush must wait for the next irrigation time. In other words, AquaLush makes no attempt to detect and react to irrigation times skipped as a result of a time setting.

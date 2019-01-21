@@ -1,0 +1,1 @@
+If AquaLush cannot read its persistent store during startup, then it must display the screen shown in Figure B-7-17 and suspend further processing.

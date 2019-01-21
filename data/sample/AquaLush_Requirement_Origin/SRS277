@@ -1,0 +1,1 @@
+If the user presses the “Propagate to Zone” screen button, then all valves in the current valve’s zone must be opened (if the current valve is open) or closed (if the current valve is closed).
