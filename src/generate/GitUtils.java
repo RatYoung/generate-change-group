@@ -23,7 +23,7 @@ public class GitUtils {
 			System.out.println("Commit: " + commitName);
 			System.out.println("SHA-1: " + id.name());
 		}else
-			git.checkout().setName(repo.getBranch()).call();
+			git.checkout().setName(currentBranch).call();
 		git.getRepository().close();
 		git.close();
 	}

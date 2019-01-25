@@ -45,6 +45,8 @@ public class JavaElementsParser {
         parsert.setSource(javaSource.toCharArray());
         this.root = (CompilationUnit) parsert.createAST(null);
 
+        if(root == null)
+        	System.out.println("null!!");
         packageName = root.getPackage().getName().getFullyQualifiedName();
         sourceCodeElements.addPackage(packageName);
         // types represent all class in this file, includes public and non-public class

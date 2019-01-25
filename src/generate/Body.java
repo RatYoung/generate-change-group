@@ -27,9 +27,13 @@ public class Body {
 //		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\测试用开源工程\\commons-io";
 //		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\测试用开源工程\\BuildCraft";
 //		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\测试用开源工程\\mdrill";
-		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\测试用开源工程\\RxJava";
+//		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\测试用开源工程\\astyanax";
+//		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\测试用开源工程\\jitwatch"; //bug
+		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\测试用开源工程\\SpongeForge";
+//		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\测试用开源工程\\photup";
 		
-		String rollBack = "HEAD~50";
+		String rollBack = "HEAD~150";
+//		String rollBack = "HEAD~1";
 		String newCommit = "HEAD";
 		Boolean isSaved = false;
 		
