@@ -24,17 +24,16 @@ public class Body {
 		//needless requirement path!
 		String reqPath = "E:\\Desktop\\workspace\\Coding\\Java\\req-swing-demo\\data\\sample\\AquaLush_Requirement";
 		
-//		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\测试用开源工程\\commons-io";
-//		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\测试用开源工程\\BuildCraft";
-//		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\测试用开源工程\\mdrill";
-//		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\测试用开源工程\\astyanax";
-//		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\测试用开源工程\\jitwatch"; //bug
-		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\okhttp";
-//		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\测试用开源工程\\photup";
+//		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\okhttp";
+//		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\elasticsearch"; //failed
+//		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\retrofit";
+//		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\android-best-practices";
+//		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\RxJava";
+		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\react-native";	//failed
 		
-//		String rollBack = "HEAD~150";
-		String rollBack = "fcd40ec711b9b956a0e2faf7f2ce000acc5de302~1";
-		String newCommit = "fcd40ec711b9b956a0e2faf7f2ce000acc5de302";
+		
+		String newCommit = "1d561fd604800164134c9c95d10c3b596898a2f5";
+		String rollBack = newCommit + "~1";
 		Boolean isSaved = false;
 		
 		File localVersion = new File(localRepoPath);
@@ -69,8 +68,16 @@ public class Body {
 		
 		System.out.println();
 		System.out.println("-------------Generating ChangeGroups----------");
-		re.process(newJavaPath.getAbsolutePath(), oldJavaPath.getAbsolutePath(), reqPath, isSaved);
-		
+		try {
+			re.process(newJavaPath.getAbsolutePath(), oldJavaPath.getAbsolutePath(), reqPath, isSaved);
+		}catch(Exception e) {
+			System.out.println(e);
+			if (!isSaved) {
+				Boolean deleteNewJava = FileUtils.deleteQuietly(newJavaPath);
+				Boolean deleteOldJava = FileUtils.deleteQuietly(oldJavaPath);
+			}
+			return;
+		}
 		if (!isSaved) {
 			Boolean deleteNewJava = FileUtils.deleteQuietly(newJavaPath);
 			Boolean deleteOldJava = FileUtils.deleteQuietly(oldJavaPath);
