@@ -5,6 +5,8 @@ import generate.GitUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
@@ -12,7 +14,6 @@ import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.eclipse.jgit.api.errors.*;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
-import org.eclipse.jgit.lib.ObjectId;
 
 public class Body {
 	@SuppressWarnings("unused")
@@ -29,15 +30,27 @@ public class Body {
 //		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\retrofit";
 //		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\android-best-practices";
 //		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\RxJava";
-		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\react-native";	//failed
+//		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\react-native";	//failed
+//		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\ion";
+//		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\hive";
+//		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\liquibase";
+		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\checkstyle";
 		
-		
-		String newCommit = "1d561fd604800164134c9c95d10c3b596898a2f5";
+		String newCommit = "a73868f2d366e12bbcba5cc90384536384fae656";
 		String rollBack = newCommit + "~1";
 		Boolean isSaved = false;
 		
 		File localVersion = new File(localRepoPath);
 		
+		boolean hasJavaFiles = GitUtils.hasJavaFiles(localVersion, newCommit);
+		if(!hasJavaFiles) {
+			System.out.println("-------------Diffs DON'T contain *.java files----------");
+			System.out.println("Commit: " + newCommit);
+			double t1 = System.currentTimeMillis();
+			System.out.println("Finished.\nTime used: " + ((t1 - t0) / 1000) + "s");
+			return;
+		}
+	
 		//get current ObjectId in order to checkout back
 		FileRepository repo = new FileRepository(localRepoPath + "\\.git");
 		String currentBranch = repo.getBranch();
@@ -71,7 +84,14 @@ public class Body {
 		try {
 			re.process(newJavaPath.getAbsolutePath(), oldJavaPath.getAbsolutePath(), reqPath, isSaved);
 		}catch(Exception e) {
+			StringWriter sw = null;
+			PrintWriter pw = null;
 			System.out.println(e);
+			sw = new StringWriter();
+			pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			pw.flush();
+			sw.flush();
 			if (!isSaved) {
 				Boolean deleteNewJava = FileUtils.deleteQuietly(newJavaPath);
 				Boolean deleteOldJava = FileUtils.deleteQuietly(oldJavaPath);

@@ -17,7 +17,8 @@ public class ChangeRegionAlgorithm {
     public ChangeRegionAlgorithm(CodeElementsComparer codeElementsComparer) {
 
 //        RelationInfo relationInfoForChangedPart = new RelationInfo(newVersionJarPath, oldVersionJarPath, codeElementsComparer, false);
-        RelationInfo relationInfoForChangedPart = new RelationInfo(codeElementsComparer.getNewVersionCodeDirPath(), codeElementsComparer.getOldVersionCodeDirPath(), codeElementsComparer, false);
+//        RelationInfo relationInfoForChangedPart = new RelationInfo(codeElementsComparer.getNewVersionCodeDirPath(), codeElementsComparer.getOldVersionCodeDirPath(), codeElementsComparer, false);
+        RelationInfo relationInfoForChangedPart = new RelationInfo(codeElementsComparer.getNewVersionCodeDirPath(), codeElementsComparer.getOldVersionCodeDirPath(), codeElementsComparer, true);
         CallRelationGraph callGraphForChangedPart = new CallRelationGraph(relationInfoForChangedPart);
         double thresholdForInitialRegion = 0.35;
 //        RelationInfo oldRelationInfo = new RelationInfo(newVersionJarPath,false);
