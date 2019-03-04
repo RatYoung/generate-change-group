@@ -29,12 +29,12 @@ public class Body {
 //		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\测试用开源工程\\mdrill";
 //		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\测试用开源工程\\astyanax";
 //		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\测试用开源工程\\jitwatch"; //bug
-		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\测试用开源工程\\SpongeForge";
+		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\okhttp";
 //		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\测试用开源工程\\photup";
 		
-		String rollBack = "HEAD~150";
-//		String rollBack = "HEAD~1";
-		String newCommit = "HEAD";
+//		String rollBack = "HEAD~150";
+		String rollBack = "fcd40ec711b9b956a0e2faf7f2ce000acc5de302~1";
+		String newCommit = "fcd40ec711b9b956a0e2faf7f2ce000acc5de302";
 		Boolean isSaved = false;
 		
 		File localVersion = new File(localRepoPath);

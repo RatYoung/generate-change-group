@@ -7,8 +7,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.io.FileUtils;
+import org.eclipse.jgit.api.errors.GitAPIException;
 
 
 public class CommitFinder {
@@ -18,7 +21,7 @@ public class CommitFinder {
 	
 	public CommitFinder() {}
 	
-	public void commitHashsetInitialize(String repoPath) throws IOException {
+	public void commitHashsetInitialize(String repoPath) throws IOException, GitAPIException {
 		writeBuffer = "";
 		commitHashset = new CommitHashset(repoPath);
 	}
@@ -27,7 +30,19 @@ public class CommitFinder {
 		String certainMsgContent = CertainMsg.get(msgFilePath);
 		if(certainMsgContent.startsWith("Merge"))
 			return "MergeCommits";
-		boolean isFound = commitHashset.map.containsKey(certainMsgContent);
+		boolean isFound = commitHashset.map.containsKey(certainMsgContent);  // comment it only for deeplearning4j
+//		for(Map.Entry<String, String> entry: commitHashset.map.entrySet()) {
+//			String k = entry.getKey();
+//			String v = entry.getValue();
+//			System.out.println(certainMsgContent + "\t" + k);
+//			String firstLine = k.split("\\n")[0];
+//			firstLine = firstLine.substring(0, firstLine.length());
+//			if(k.contains(certainMsgContent) || certainMsgContent.contains(k)) {
+//				return v;
+//			}
+//		}
+//		return null;
+		
 		if(isFound) {
 			String SHA1 = commitHashset.map.get(certainMsgContent);
 			return SHA1;
@@ -36,7 +51,7 @@ public class CommitFinder {
 		}
 	}
 	
-	public void findRepo(String srcRepoPath, String dstRepoPath) throws IOException {
+	public void findRepo(String srcRepoPath, String dstRepoPath) throws IOException, GitAPIException {
 		commitHashsetInitialize(dstRepoPath);
 		File srcRepoDir = new File(srcRepoPath);
 		String repoNo = srcRepoDir.getName();
@@ -58,21 +73,17 @@ public class CommitFinder {
 	}
 	
 	@SuppressWarnings("deprecation")
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, GitAPIException {
 		CommitFinder commitFinder = new CommitFinder();
 		String srcRepoRootPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\Commitgen Public\\commitmsgs";
 		String dstRepoRootPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006";
-		String outputResPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\mappingRes";
+		String outputResPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\mapping-ops\\mappings";
 		
 		
-		String repoNo2repoNameMappingTxt = "mapping1000.txt";
+		String repoNo2repoNameMappingTxt = "update_javaProjectIndex_1000.txt";
 		File repoNo2repoName = new File(dstRepoRootPath + "\\" +repoNo2repoNameMappingTxt);
 		List<String> lines = FileUtils.readLines(repoNo2repoName, "utf-8");
 		for(String line: lines) {
-			if(line.startsWith("#")) {
-				System.out.println("skipped due to repo doesn't exist.");
-				continue;
-			}
 			String[] splitArr = line.split("\t");
 			int num = Integer.parseInt(splitArr[0]);
 			String repoName = splitArr[1];
@@ -81,11 +92,11 @@ public class CommitFinder {
 			File outputRes = new File(outputResPath + "\\repo" + num + ".mapping");
 			if(outputRes.exists()) {
 				//comment this if-branch if you wanna refresh the result.
-				System.out.println("repo" + num + " finished");
+//				System.out.println("repo" + num + " finished");
 				continue;
 			}
 			if(!new File(dstRepoPath).exists()) {
-				System.out.println("repo" + num + " not exists");
+				System.out.println("repo" + num + "(" + repoName + ") not exists");
 				continue;
 			}
 			commitFinder.findRepo(srcRepoPath, dstRepoPath);
