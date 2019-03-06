@@ -81,7 +81,7 @@ public class GitUtils {
 	
 	public static void main(String[] args) throws RefAlreadyExistsException, RefNotFoundException, InvalidRefNameException, CheckoutConflictException, IOException, GitAPIException {
 //		File repoDir = new File("E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\测试用开源工程\\commons-io");
-		File repoDir = new File("E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\liquibase");
+		File repoDir = new File("F:\\创新项目\\sample projects\\liquibase");
 //		GitUtils.checkoutCommit(repoDir, "HEAD^");  //commit SHA-1 value  or  HEAD[^] or master or etc.
 		File gitDir = new File(repoDir.getAbsolutePath() + "\\.git");
 		FileRepository repo = new FileRepository(gitDir);

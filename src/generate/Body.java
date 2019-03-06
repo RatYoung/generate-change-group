@@ -23,7 +23,7 @@ public class Body {
 		NewRetro re = new NewRetro();
 		
 		//needless requirement path!
-		String reqPath = "E:\\Desktop\\workspace\\Coding\\Java\\req-swing-demo\\data\\sample\\AquaLush_Requirement";
+		String reqPath = "C:\\Users\\24541\\Desktop\\req-swing-demo\\data\\sample\\AquaLush_Requirement";
 		
 //		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\okhttp";
 //		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\elasticsearch"; //failed
@@ -34,9 +34,9 @@ public class Body {
 //		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\ion";
 //		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\hive";
 //		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\liquibase";
-		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\checkstyle";
+		String localRepoPath = "F:\\创新项目\\sample projects\\okhttp";
 		
-		String newCommit = "a73868f2d366e12bbcba5cc90384536384fae656";
+		String newCommit = "757f8ede8936402e576a16988f50994eda41f7a1";
 		String rollBack = newCommit + "~1";
 		Boolean isSaved = false;
 		
