@@ -3,7 +3,7 @@ package generate;
 import java.sql.*;
 
 public class ReadSql {
-	public static void executeSQL(String sql) {
+	public static ResultSet executeSQL(String sql) {
 		Connection c = null;
 		Statement stmt = null;
 		try {
@@ -15,19 +15,19 @@ public class ReadSql {
 			stmt = c.createStatement();
 			
 			ResultSet rs = stmt.executeQuery(sql);
-			while (rs.next()) {
-				String name = rs.getString("name");
-				System.out.println(name);
-			}
 
 			stmt.close();
 			c.commit();
 			c.close();
+			
+			System.out.println("________Repositories loaded successfully_________");
+			return rs;
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
+			
+			return null;
 		}
-		System.out.println("________Repositories loaded successfully_________");
 	}
 	
 	public static void main(String[] args) {
