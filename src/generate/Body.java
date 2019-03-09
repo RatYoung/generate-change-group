@@ -48,8 +48,11 @@ public class Body {
 			c.close();
 		}
 		
+		List<String> names = new ArrayList<>();
 		while(rs_names.next()) {
-			String name = rs_names.getString("name");
+			names.add(rs_names.getString("name"));
+		}
+		for(String name: names) {
 			System.out.println(name);
 			
 			

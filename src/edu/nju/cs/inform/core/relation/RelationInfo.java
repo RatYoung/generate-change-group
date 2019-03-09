@@ -12,6 +12,7 @@ import edu.nju.cs.inform.core.relation.info.RelationPair;
 import java.io.File;
 import java.io.Serializable;
 import java.util.*;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * Created by niejia on 15/2/26.
@@ -177,7 +178,7 @@ public class RelationInfo implements Serializable {
     }
 
     // not concerned modified vertexes
-    public RelationInfo(String newVersionCallRelationSource, String oldVersionCallRelationSource, CodeElementsComparer codeElementsComparer, Boolean concernedModifiedArtifact) {
+    public RelationInfo(String newVersionCallRelationSource, String oldVersionCallRelationSource, CodeElementsComparer codeElementsComparer, Boolean concernedModifiedArtifact) throws InterruptedException {
         this.granularity = Granularity.METHOD;
         artifactNames = new LinkedHashSet<>();
 
@@ -200,11 +201,23 @@ public class RelationInfo implements Serializable {
             JCallGraph newCallGraph = new JCallGraph(newVersionCallRelationSource);
             newCallGraphMap = JCallGraph.callGraphMap;
         } else if (oldFile.isDirectory() && newFile.isDirectory()) {
-            ProjectCallRelationAnalyser analyserOld = new ProjectCallRelationAnalyser(oldVersionCallRelationSource);
-            oldCallGraphMap = analyserOld.getCallGraphMap();
-
+        	int threadCount = 2;
+            //所有线程阻塞，然后统一开始
+            CountDownLatch begin = new CountDownLatch(1);
+            //主线程阻塞，直到所有分线程执行完毕
+            CountDownLatch end = new CountDownLatch(threadCount);
+            //开始多线程
+            begin.countDown();
+            new Thread((oldCallGraphMap) ->{
+            	ProjectCallRelationAnalyser analyserOld = new ProjectCallRelationAnalyser(oldVersionCallRelationSource);
+        		oldCallGraphMap = analyserOld.getCallGraphMap();
+            }	
+            ).start();
+            
             ProjectCallRelationAnalyser analyserNew = new ProjectCallRelationAnalyser(newVersionCallRelationSource);
             newCallGraphMap = analyserNew.getCallGraphMap();
+            
+            end.await();
         }
         if (!concernedModifiedArtifact) {
             removeModifiedArtifactInMap(oldCallGraphMap);
@@ -273,7 +286,7 @@ public class RelationInfo implements Serializable {
 
         // check if there are some vertexes has no call neighbours, so they are not added into the graph
         for (String artifact : changedArtifacts.getWholeChangedArtifactList()) {
-            if (changedArtifacts.isAddedMethod(artifact) || changedArtifacts.isRemovedMethod(artifact)) {
+            if (changedArtifacts.isAddedMethod(artifact) || changedArtifacts.isRemovedMethod(artifact) || /*modified by yx*/ changedArtifacts.isModifiedMethod(artifact)) {
 //            if (changedArtifacts.isAddedArtifact(artifact) || changedArtifacts.isRemovedArtifact(artifact)) {
                 if (!vertexNameIdMap.containsKey(artifact)) {
 //                    System.out.println(("Not considering such element " + artifact));
