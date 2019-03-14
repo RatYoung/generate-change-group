@@ -54,7 +54,8 @@ public class Body {
 		}
 		for(String name: names) {
 			System.out.println(name);
-			
+			if (!name.equals("netty"))
+				continue;
 			
 			NewRetro re = new NewRetro();
 			
@@ -72,10 +73,10 @@ public class Body {
 			while(shaSet_test.next()) {
 				String sha = shaSet_test.getString("sha");
 				String note = shaSet_test.getString("note");
-				if(note != null) {		//if it has been parsed as "noJavaFiles" or <Exceptions>
-					System.out.println(sha + " done: " + note);
-					continue;
-				}
+//				if(note != null) {		//if it has been parsed as "noJavaFiles" or <Exceptions>
+//					System.out.println(sha + " done: " + note);
+//					continue;
+//				}
 //				System.out.println(sha);
 				shas.add(sha);
 			}
@@ -83,10 +84,10 @@ public class Body {
 			while(shaSet_train.next()) {
 				String sha = shaSet_train.getString("sha");
 				String note = shaSet_train.getString("note");
-				if(note != null) {		//if it has been parsed as "noJavaFiles" or <Exceptions>
-					System.out.println(sha + " done: " + note);
-					continue;
-				}
+//				if(note != null) {		//if it has been parsed as "noJavaFiles" or <Exceptions>
+//					System.out.println(sha + " done: " + note);
+//					continue;
+//				}
 //				System.out.println(sha);
 				shas.add(sha);
 			}
@@ -94,10 +95,10 @@ public class Body {
 			while(shaSet_valid.next()) {
 				String sha = shaSet_valid.getString("sha");
 				String note = shaSet_valid.getString("note");
-				if(note != null) {		//if it has been parsed as "noJavaFiles" or <Exceptions>
-					System.out.println(sha + " done: " + note);
-					continue;
-				}
+//				if(note != null) {		//if it has been parsed as "noJavaFiles" or <Exceptions>
+//					System.out.println(sha + " done: " + note);
+//					continue;
+//				}
 //				System.out.println(sha);
 				shas.add(sha);
 			}

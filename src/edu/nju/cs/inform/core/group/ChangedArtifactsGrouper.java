@@ -130,7 +130,10 @@ public class ChangedArtifactsGrouper {
 //        System.out.println("Not allocated fields: " + fieldsNotAllocated);
 
         //remove all method which is just changed in method body
-        removeModifiedArtifacts();
+        //modified by yx 2019.3.9 - 
+        //in need of identifying changes in method because most commits contain few changes within methods.
+        //if you don't want to identify them, just uncomment the line below.
+//        removeModifiedArtifacts();
 
         cleanEmptyRegion();
 

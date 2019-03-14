@@ -41,7 +41,8 @@ public class JavaElementsParser {
         this.strContent = extractStrContent(javaSource);
         this.sourceCodeElements = sourceCodeElements;
 
-        ASTParser parsert = ASTParser.newParser(AST.JLS3);
+//        ASTParser parsert = ASTParser.newParser(AST.JLS3);    //modified by yx
+        ASTParser parsert = ASTParser.newParser(AST.JLS8);
         parsert.setSource(javaSource.toCharArray());
         this.root = (CompilationUnit) parsert.createAST(null);
 

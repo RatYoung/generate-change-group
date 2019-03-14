@@ -180,6 +180,41 @@ public class CodeElementsComparer {
 				codeElementChangesList.add(elementChange);
 			}
 		}
+		
+		//added by yx in 2019.3.9
+		//IN NEED OF identification of modified elements!!
+		//if you don't want to, just uncomment the for loop below.
+		if(elementType.equals(ElementType.Method)) {
+			for (String p : unchangedElements) {
+//				if(p.contains("com.facebook.presto.TupleInfo.Type")) {
+//					System.out.println(p);
+//					oldVersionCodeElements.getMethodBody(p);
+//					oldVersionCodeElements.getMethodComments(p);
+//					oldVersionCodeElements.getMethodParameters(p);
+//				}
+				String oldMethodBody = oldVersionCodeElements.getMethodBody(p);
+				String newMethodBody = newVersionCodeElements.getMethodBody(p);
+				if (!oldMethodBody.equals(newMethodBody)) {
+					CodeElementChange elementChange = new CodeElementChange(p, elementType, ChangeType.Unchanged);
+					codeElementChangesList.add(elementChange);
+				}
+			}
+		}
+		
+		if(elementType.equals(ElementType.Field)) {
+			for (String p : unchangedElements) {
+//				if(p.contains("com.facebook.presto.TupleInfo.Type")) {
+//					System.out.println(p);
+//				}
+				Set<String> oldFields = oldVersionCodeElements.getFieldsList();
+				Set<String> newField = newVersionCodeElements.getFieldsList();
+				if (!oldFields.equals(newField)) {
+					CodeElementChange elementChange = new CodeElementChange(p, elementType, ChangeType.Unchanged);
+					codeElementChangesList.add(elementChange);
+				}
+			}
+		}	
+//		System.out.println("fuck it");
 	}
 
 	public Set<CodeElementChange> getCodeElementChangesList() {

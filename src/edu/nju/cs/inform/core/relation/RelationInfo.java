@@ -178,7 +178,7 @@ public class RelationInfo implements Serializable {
     }
 
     // not concerned modified vertexes
-    public RelationInfo(String newVersionCallRelationSource, String oldVersionCallRelationSource, CodeElementsComparer codeElementsComparer, Boolean concernedModifiedArtifact) throws InterruptedException {
+    public RelationInfo(String newVersionCallRelationSource, String oldVersionCallRelationSource, CodeElementsComparer codeElementsComparer, Boolean concernedModifiedArtifact)  {
         this.granularity = Granularity.METHOD;
         artifactNames = new LinkedHashSet<>();
 
@@ -201,23 +201,20 @@ public class RelationInfo implements Serializable {
             JCallGraph newCallGraph = new JCallGraph(newVersionCallRelationSource);
             newCallGraphMap = JCallGraph.callGraphMap;
         } else if (oldFile.isDirectory() && newFile.isDirectory()) {
-        	int threadCount = 2;
-            //所有线程阻塞，然后统一开始
-            CountDownLatch begin = new CountDownLatch(1);
-            //主线程阻塞，直到所有分线程执行完毕
-            CountDownLatch end = new CountDownLatch(threadCount);
-            //开始多线程
-            begin.countDown();
-            new Thread((oldCallGraphMap) ->{
-            	ProjectCallRelationAnalyser analyserOld = new ProjectCallRelationAnalyser(oldVersionCallRelationSource);
-        		oldCallGraphMap = analyserOld.getCallGraphMap();
-            }	
-            ).start();
-            
+//        	int threadCount = 2;
+//            //所有线程阻塞，然后统一开始
+//            CountDownLatch begin = new CountDownLatch(1);
+//            //主线程阻塞，直到所有分线程执行完毕
+//            CountDownLatch end = new CountDownLatch(threadCount);
+//            //开始多线程
+//            begin.countDown();
+        	ProjectCallRelationAnalyser analyserOld = new ProjectCallRelationAnalyser(oldVersionCallRelationSource);
+            oldCallGraphMap = analyserOld.getCallGraphMap();
+        	
             ProjectCallRelationAnalyser analyserNew = new ProjectCallRelationAnalyser(newVersionCallRelationSource);
             newCallGraphMap = analyserNew.getCallGraphMap();
             
-            end.await();
+//            end.await();
         }
         if (!concernedModifiedArtifact) {
             removeModifiedArtifactInMap(oldCallGraphMap);

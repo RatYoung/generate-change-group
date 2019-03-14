@@ -23,10 +23,11 @@ public class Test {
 		
 		
 		NewRetro re = new NewRetro();
-		String name = "vert.x";
+		String name = "presto";
 		String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\"+name;
 		double t0 = System.currentTimeMillis();
-		String newCommit = "d887515f857acb07a903130cd8a0321cc8dc653c";
+//		vert.x d887515f857acb07a903130cd8a0321cc8dc653c
+		String newCommit = "e8db2bbbde5c90d99a2a37976717ab7cc4aa499f";
 		String rollBack = newCommit + "~1";
 		Boolean isSaved = false;	
 		File localVersion = new File(localRepoPath);
