@@ -183,6 +183,17 @@ public class ChangedArtifacts {
         }
         return result;
     }
+    
+    //addedd by yx in 2019.3.14
+    public HashSet<String> getModifiedMethodsList() {
+        HashSet<String> result = new LinkedHashSet<>();
+        for (String str : modifiedArtifactList) {
+            if (isMethod(str)) {
+                result.add(str);
+            }
+        }
+        return result;
+    }
 
     public HashSet<String> getRemovedFieldsList() {
         HashSet<String> result = new LinkedHashSet<>();
@@ -197,6 +208,17 @@ public class ChangedArtifacts {
     public HashSet<String> getAddedFieldsList() {
         HashSet<String> result = new LinkedHashSet<>();
         for (String str : addedArtifactList) {
+            if (isField(str)) {
+                result.add(str);
+            }
+        }
+        return result;
+    }
+    
+    //addedd by yx in 2019.3.14
+    public HashSet<String> getModifiedFieldsList() {
+        HashSet<String> result = new LinkedHashSet<>();
+        for (String str : modifiedArtifactList) {
             if (isField(str)) {
                 result.add(str);
             }

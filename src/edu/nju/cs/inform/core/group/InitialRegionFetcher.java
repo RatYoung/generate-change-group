@@ -31,6 +31,8 @@ public class InitialRegionFetcher {
     private void findInitialRegion() {
         findInitialRegionForEachVertex(changedArtifacts.getAddedMethodsList(), changedArtifacts.getAddedFieldsList(),newCallGraph);
         findInitialRegionForEachVertex(changedArtifacts.getRemovedMethodsList(), changedArtifacts.getRemovedFieldsList(), oldCallGraph);
+        findInitialRegionForEachVertex(changedArtifacts.getModifiedMethodsList(), changedArtifacts.getModifiedFieldsList(), oldCallGraph);
+        findInitialRegionForEachVertex(changedArtifacts.getModifiedMethodsList(), changedArtifacts.getModifiedFieldsList(), newCallGraph);
 
     }
 
