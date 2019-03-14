@@ -14,6 +14,8 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
 
+import javax.swing.JComboBox.KeySelectionManager;
+
 /**
  * Created by niejia on 15/2/26.
  */
@@ -210,6 +212,13 @@ public class RelationInfo implements Serializable {
 //            begin.countDown();
         	ProjectCallRelationAnalyser analyserOld = new ProjectCallRelationAnalyser(oldVersionCallRelationSource);
             oldCallGraphMap = analyserOld.getCallGraphMap();
+            for(Map.Entry<String, Vector<String>> entry: oldCallGraphMap.entrySet()) {
+            	System.out.println(entry.getKey());
+            	Vector<String> values = entry.getValue();
+            	for(String value: values) {
+            		System.out.println(value);
+            	}
+            }
         	
             ProjectCallRelationAnalyser analyserNew = new ProjectCallRelationAnalyser(newVersionCallRelationSource);
             newCallGraphMap = analyserNew.getCallGraphMap();

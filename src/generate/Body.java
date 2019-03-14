@@ -32,7 +32,8 @@ public class Body {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:NMTdata-ultimate.sqlite3");
-			c.setAutoCommit(false);
+			c.setAutoCommit(true);
+			//c.setAutoCommit(false);
 			System.out.println("Opened database successfully");
 
 			stmt = c.createStatement();
@@ -44,7 +45,7 @@ public class Body {
 			System.exit(0);
 			
 			stmt.close();
-			c.commit();
+			//c.commit();
 			c.close();
 		}
 		
@@ -60,7 +61,7 @@ public class Body {
 			NewRetro re = new NewRetro();
 			
 //			String localRepoPath = "F:\\创新项目\\sample projects\\"+name;
-			String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\"+name;
+			String localRepoPath = "F:\\创新项目\\sample projects\\"+name;
 			int repoNum = 0;
 			ResultSet repoNumSet = stmt.executeQuery("SELECT repoNum FROM repositories WHERE name = '" + name + "'");
 			if (repoNumSet.next()) {
@@ -121,7 +122,7 @@ public class Body {
 					stmt.executeUpdate("UPDATE test SET note = 'noJavaFiles' WHERE sha = '"+each+"' AND repoNum = "+repoNum);
 					stmt.executeUpdate("UPDATE train SET note = 'noJavaFiles' WHERE sha = '"+each+"' AND repoNum = "+repoNum);
 					stmt.executeUpdate("UPDATE valid SET note = 'noJavaFiles' WHERE sha = '"+each+"' AND repoNum = "+repoNum);
-					c.commit();
+					//c.commit();
 					continue;
 				}
 			
@@ -132,28 +133,38 @@ public class Body {
 				repo.close();
 				
 				//mkdirs for java files
+				boolean isOldExisted = true;
+				boolean isNewExisted = true;
 				File newJavaPath = new File(localRepoPath+"-"+newCommit+"-java");
-				newJavaPath.mkdirs();
+				if(!newJavaPath.exists()) {
+					isNewExisted = false;
+					newJavaPath.mkdirs();
+				}
 				File oldJavaPath = new File(localRepoPath+"-"+rollBack+"-java");
-				oldJavaPath.mkdirs();
+				if(!oldJavaPath.exists()) {
+					isOldExisted = false;
+					oldJavaPath.mkdirs();	
+				}
 				
 				//get older version
-				
-				GitUtils.checkoutCommit(localVersion, rollBack);
-				Collection<File> oldListFiles = FileUtils.listFiles(localVersion, FileFilterUtils.suffixFileFilter("java"), DirectoryFileFilter.INSTANCE);
-				for (File file : oldListFiles) {
-					FileUtils.copyFileToDirectory(file, oldJavaPath);
+				if(!isOldExisted) {
+					GitUtils.checkoutCommit(localVersion, rollBack);
+					Collection<File> oldListFiles = FileUtils.listFiles(localVersion, FileFilterUtils.suffixFileFilter("java"), DirectoryFileFilter.INSTANCE);
+					for (File file : oldListFiles) {
+						FileUtils.copyFileToDirectory(file, oldJavaPath);
+					}
+					GitUtils.checkoutCommit(localVersion, currentBranch);
 				}
-				GitUtils.checkoutCommit(localVersion, currentBranch);
-				
-				GitUtils.checkoutCommit(localVersion, newCommit);
-				Collection<File> newListFiles = FileUtils.listFiles(localVersion, FileFilterUtils.suffixFileFilter("java"), DirectoryFileFilter.INSTANCE);
-				for (File file : newListFiles) {
-					FileUtils.copyFileToDirectory(file, newJavaPath);
+				if(!isNewExisted) {
+					GitUtils.checkoutCommit(localVersion, newCommit);
+					Collection<File> newListFiles = FileUtils.listFiles(localVersion, FileFilterUtils.suffixFileFilter("java"), DirectoryFileFilter.INSTANCE);
+					for (File file : newListFiles) {
+						FileUtils.copyFileToDirectory(file, newJavaPath);
+					}
+					GitUtils.checkoutCommit(localVersion, currentBranch);
 				}
-				GitUtils.checkoutCommit(localVersion, currentBranch);
 				
-				System.out.println();
+				System.out.println("checkout & shift *.java finished.");
 				System.out.println("-------------Generating ChangeGroups----------");
 				try {
 					re.process(newJavaPath.getAbsolutePath(), oldJavaPath.getAbsolutePath(), reqPath, isSaved);
@@ -163,7 +174,7 @@ public class Body {
 					stmt.executeUpdate("UPDATE test SET note = '"+e.getClass().getName()+"' WHERE sha = '"+each+"' AND repoNum = "+repoNum);
 					stmt.executeUpdate("UPDATE train SET note = '"+e.getClass().getName()+"' WHERE sha = '"+each+"' AND repoNum = "+repoNum);
 					stmt.executeUpdate("UPDATE valid SET note = '"+e.getClass().getName()+"' WHERE sha = '"+each+"' AND repoNum = "+repoNum);
-					c.commit();
+					//c.commit();
 					if (!isSaved) {
 						Boolean deleteNewJava = FileUtils.deleteQuietly(newJavaPath);
 						Boolean deleteOldJava = FileUtils.deleteQuietly(oldJavaPath);
@@ -178,10 +189,12 @@ public class Body {
 				stmt.executeUpdate("UPDATE test SET note = 'OK' WHERE sha = '"+each+"' AND repoNum = "+repoNum);
 				stmt.executeUpdate("UPDATE train SET note = 'OK' WHERE sha = '"+each+"' AND repoNum = "+repoNum);
 				stmt.executeUpdate("UPDATE valid SET note = 'OK' WHERE sha = '"+each+"' AND repoNum = "+repoNum);
-				c.commit();
+				//c.commit();
 				double t1 = System.currentTimeMillis();
 				System.out.println("Finished.\nTime used: " + ((t1 - t0) / 1000) + "s");
 			}
 		}
+		stmt.close();
+		c.close();
 	}
 }
