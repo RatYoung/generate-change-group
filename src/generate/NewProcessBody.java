@@ -140,7 +140,7 @@ public class NewProcessBody {
 				int i = 1;
 		        for (Set<String> region : finalRegionsList) {
 		            //System.out.println("Region " + i + ":");
-		            total_region = total_region + "Region " + i + ":\n";
+		            total_region = total_region + "Region " + i;
 		            int j = 1;
 		            for (String s : region) {
 		                //System.out.println(j+": "+s);
@@ -152,6 +152,7 @@ public class NewProcessBody {
 		        
 		        if(i > 2) {
 		        	String sql = "insert into version_region values('" + each + "','" + total_region + "');";
+		        	stmt.executeUpdate(sql);
 		        }
 		        
 			}catch(Exception e) {
