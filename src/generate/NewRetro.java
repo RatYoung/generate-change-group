@@ -1,6 +1,7 @@
 package generate;
 
 import edu.nju.cs.inform.core.diff.*;
+import edu.nju.cs.inform.core.group.ChangedArtifactsGrouper;
 import edu.nju.cs.inform.core.type.*;
 import edu.nju.cs.inform.core.recommend.*;
 import edu.nju.cs.inform.io.*;
@@ -16,6 +17,8 @@ import java.util.*;
  */
 
 public class NewRetro {
+	public List<HashSet<String>> group;
+	public Map<String, HashSet<String>> changeRegions;
 
 	public String new_source_path;
 	public String old_source_path;
@@ -32,6 +35,8 @@ public class NewRetro {
 		CodeElementsComparer comparer;
 		comparer = new CodeElementsComparer(new_source_path, old_source_path);
 		comparer.diff();
+		group = comparer.group;
+		changeRegions = comparer.changeRegions;
 		Set<CodeElementChange> codeElementChangeList = comparer.getCodeElementChangesList();
 		this.codeElementChangeList = codeElementChangeList;
 		// get change description from code changes

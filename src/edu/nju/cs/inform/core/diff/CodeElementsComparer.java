@@ -3,6 +3,7 @@ package edu.nju.cs.inform.core.diff;
 import edu.nju.cs.inform.core.preprocess.ArtifactPreprocessor;
 import edu.nju.cs.inform.core.type.*;
 import edu.nju.cs.inform.core.group.ChangeRegionAlgorithm;
+import edu.nju.cs.inform.core.group.ChangedArtifactsGrouper;
 import edu.nju.cs.inform.io.ArtifactsReader;
 import edu.nju.cs.inform.io.ChangedArtifacts;
 import edu.nju.cs.inform.core.relation.RelationInfo;
@@ -14,7 +15,9 @@ import java.util.*;
  * Created by niejia on 16/3/15.
  */
 public class CodeElementsComparer {
-
+	public List<HashSet<String>> group;
+	public Map<String, HashSet<String>> changeRegions;
+	
 	private String postfixName = ".java";
 
 	private SourceCodeElements newVersionCodeElements;
@@ -68,6 +71,8 @@ public class CodeElementsComparer {
 //        extractChangeDescription();
 
 		ChangeRegionAlgorithm algorithm = new ChangeRegionAlgorithm(this);
+		group = algorithm.group;
+		changeRegions = algorithm.changeRegions;
 	}
 
 	private void findMethodFieldChanges() {
