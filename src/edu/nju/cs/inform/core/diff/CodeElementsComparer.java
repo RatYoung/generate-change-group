@@ -9,12 +9,15 @@ import edu.nju.cs.inform.io.ChangedArtifacts;
 import edu.nju.cs.inform.core.relation.RelationInfo;
 import edu.nju.cs.inform.util.JavaElement;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Created by niejia on 16/3/15.
  */
-public class CodeElementsComparer {
+public class CodeElementsComparer implements Serializable {
+
+	private static final long serialVersionUID = -7983877952952295387L;
 	public List<HashSet<String>> group;
 	public Map<String, HashSet<String>> changeRegions;
 	
@@ -22,6 +25,7 @@ public class CodeElementsComparer {
 
 	private SourceCodeElements newVersionCodeElements;
 	private SourceCodeElements oldVersionCodeElements;
+	public SourceCodeElements diffCodeElements;
 
 //    codeElementChangesList contains the whole code changes. It will be filtered, and then has the same result just like JDiff.
 	private Set<CodeElementChange> codeElementChangesList;
@@ -206,19 +210,21 @@ public class CodeElementsComparer {
 			}
 		}
 		
-		if(elementType.equals(ElementType.Field)) {
-			for (String p : unchangedElements) {
-//				if(p.contains("com.facebook.presto.TupleInfo.Type")) {
-//					System.out.println(p);
-//				}
-				Set<String> oldFields = oldVersionCodeElements.getFieldsList();
-				Set<String> newField = newVersionCodeElements.getFieldsList();
-				if (!oldFields.equals(newField)) {
-					CodeElementChange elementChange = new CodeElementChange(p, elementType, ChangeType.Unchanged);
-					codeElementChangesList.add(elementChange);
-				}
-			}
-		}	
+//		//diffElementChange:
+//		for(CodeElementChange p: codeElementChangesList) {
+//			if(p.getElementType().equals(ElementType.Package)) {
+//				diffCodeElements.addPackage(p.getElementName());
+//			}
+//			else if(p.getElementType().equals(ElementType.Class)) {
+//				diffCodeElements.addClass(p.getElementName());
+//			}
+//			else if(p.getElementType().equals(ElementType.Method)) {
+//				diffCodeElements.addMethod(p.getElementName());
+//				if(p.getChangeType())
+//			}
+//			
+//		}
+		
 //		System.out.println("fuck it");
 	}
 

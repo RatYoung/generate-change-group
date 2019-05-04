@@ -1,11 +1,13 @@
 package edu.nju.cs.inform.core.type;
 
+import java.io.Serializable;
+
 /**
  * Created by niejia on 16/3/15.
  */
-public class CodeElementChange {
-
-    private String elementName;
+public class CodeElementChange implements Serializable{
+	private static final long serialVersionUID = -2955880028576209692L;
+	private String elementName;
     private ElementType elementType;
     private ChangeType changeType;
 

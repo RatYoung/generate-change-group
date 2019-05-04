@@ -6,15 +6,17 @@ import edu.nju.cs.inform.core.type.CodeElementChange;
 import edu.nju.cs.inform.core.type.ElementType;
 import edu.nju.cs.inform.util._;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 
 /**
  * Created by niejia on 15/11/8.
  */
-public class ChangedArtifacts {
+public class ChangedArtifacts implements Serializable{
 
-    private HashSet<String> addedArtifactList;
+	private static final long serialVersionUID = -4552340381796533881L;
+	private HashSet<String> addedArtifactList;
     private HashSet<String> removedArtifactList;
     private HashSet<String> modifiedArtifactList;
 

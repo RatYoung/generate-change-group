@@ -3,6 +3,7 @@ package edu.nju.cs.inform.core.diff;
 import edu.nju.cs.inform.core.jdt.JavaElementsParser;
 import edu.nju.cs.inform.core.type.ArtifactsCollection;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -11,9 +12,10 @@ import java.util.Set;
 /**
  * Created by niejia on 16/3/15.
  */
-public class SourceCodeElements {
+public class SourceCodeElements implements Serializable{
 
-    private Set<String> packagesList;
+	private static final long serialVersionUID = 4260771613806690220L;
+	private Set<String> packagesList;
     private Set<String> classesList;
     private Set<String> methodsList;
     private Set<String> fieldsList;

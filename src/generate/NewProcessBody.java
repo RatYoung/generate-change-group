@@ -41,7 +41,8 @@ public class NewProcessBody {
 			System.out.println("Opened database successfully");
 
 			stmt = c.createStatement();
-			rs_versions = stmt.executeQuery("SELECT version FROM total_data");
+//			rs_versions = stmt.executeQuery("SELECT version FROM total_data");
+			rs_versions = stmt.executeQuery("SELECT version FROM xia_data");
 			
 			System.out.println("________Repositories loaded successfully_________");
 		} catch (Exception e) {
@@ -59,23 +60,25 @@ public class NewProcessBody {
 		}
 		//System.out.println(versions.size());
 		
-		stmt.executeUpdate("create table version_region(version varchar(20), region varchar(100));");
+		stmt.executeUpdate("create table xia_region(version varchar(20), region varchar(100), regionNum integer);");
 		
 		NewRetro re = new NewRetro();
 		
 		for(String each: versions) {
 			if(versions.indexOf(each) == versions.size()-1)
 				break;
-			String localRepoPath = "F:\\创新项目\\sample projects\\netty";
+			String localRepoPath = "E:\\Desktop\\workspace\\创新项目：紧密度追踪过时需求\\project1006\\netty";
 			String newCommit = each;
 			String rollBack = newCommit + "~1";
 			Boolean isSaved = false;	
 			File localVersion = new File(localRepoPath);
 			
 			boolean hasJavaFiles = GitUtils.hasJavaFiles(localVersion, newCommit);
-			if(!hasJavaFiles)
-				continue;
-			
+			if(!hasJavaFiles) {
+				String sql = "insert into xia_region values('" + each + "','" + "diff contains no java files" + "', '"+ 0 +"');";
+	        	stmt.executeUpdate(sql);
+	        	continue;
+			}			
 			//get current ObjectId in order to checkout back
 			FileRepository repo = new FileRepository(localRepoPath + "\\.git");
 			String currentBranch = repo.getBranch();
@@ -150,8 +153,8 @@ public class NewProcessBody {
 		            i++;
 		        }
 		        
-		        if(i > 2) {
-		        	String sql = "insert into version_region values('" + each + "','" + total_region + "');";
+		        if(i >= 1) {
+		        	String sql = "insert into xia_region values('" + each + "','" + total_region + "', '"+ (i-1) +"');";
 		        	stmt.executeUpdate(sql);
 		        }
 		        

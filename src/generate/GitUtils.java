@@ -53,8 +53,8 @@ public class GitUtils {
                 setNewTree(newTreeParser).
                 setPathFilter(PathSuffixFilter.create(".java")).
                 call();
-        repo.close();
         git.close();
+        repo.close();
         if(!diff.isEmpty()) {
         	return true;
         }else {

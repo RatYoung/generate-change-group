@@ -10,13 +10,15 @@ import edu.nju.cs.inform.core.ir.*;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * created by yx 2018/8/26 锟斤拷锟斤拷锟斤拷目demo Retro锟姐法锟斤拷锟斤拷锟侥硷�?
  */
 
-public class NewRetro {
+public class NewRetro implements Serializable{
+	private static final long serialVersionUID = -4521333533372175177L;
 	public List<HashSet<String>> group;
 	public Map<String, HashSet<String>> changeRegions;
 
@@ -27,20 +29,23 @@ public class NewRetro {
 	public List<Map.Entry<String, Double>> reqElementList;
 	public Map<String, List<String>> recommendMethodsForRequirements;
 	public Map<String, String> recommentMethodsBodyCollection;
+	
+	public ArtifactsCollection changeDescriptionCollection;
+	
+//	public CodeElementsComparer comparer;
 
 	public void process(String new_source_path, String old_source_path, String requirement_Path, Boolean isSaved) {
 		this.new_source_path = new_source_path;
 		this.old_source_path = old_source_path;
 		this.requirement_Path = requirement_Path;
-		CodeElementsComparer comparer;
-		comparer = new CodeElementsComparer(new_source_path, old_source_path);
+		CodeElementsComparer comparer = new CodeElementsComparer(new_source_path, old_source_path);
 		comparer.diff();
 		group = comparer.group;
 		changeRegions = comparer.changeRegions;
 		Set<CodeElementChange> codeElementChangeList = comparer.getCodeElementChangesList();
 		this.codeElementChangeList = codeElementChangeList;
 		// get change description from code changes
-		ArtifactsCollection changeDescriptionCollection = comparer.getChangeDescriptionCollection();
+		changeDescriptionCollection = comparer.getChangeDescriptionCollection();
 	}
 
 	// 锟斤拷元锟斤拷锟斤拷锟斤拷锟�?
